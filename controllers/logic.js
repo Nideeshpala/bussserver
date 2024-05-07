@@ -119,18 +119,26 @@ getallbus = async (req, res) => {
 
 // get single bus
 // ================
-getbos=async(req,res)=>{
-  const single=await Busess.findOne({id:req._id})
-  console.log(single);
-  if(single)
-   {
-    res.status(200).json(single)
-   }
-   else{
-    res.status(400).json("didint find any")
-   }
+getbos = async (req, res) => {
+  try {
+      let { id } = req.params;
+      id = id.substring(0, 24)
+      const single = await Busess.findOne({ _id: id });
 
-}
+      console.log(id);
+      console.log(single);
+
+      if (single) {
+          res.status(200).json(single);
+      } else {
+          res.status(400).json("Didn't find any data");
+      }
+  } catch (error) {
+      console.error("Error fetching bus data:", error);
+      res.status(500).json("Internal server error");
+  }
+};
+
 
 
 
@@ -139,7 +147,7 @@ getbos=async(req,res)=>{
 
 
 bookapi = async (req, res) => {
-  const { sname, email, gender, busname, busno, from, to, price, sename,age } = req.body
+  const { sname, email, gender, busname, busno, from, to, price, sename, age } = req.body
   console.log(sname, email, gender);
   try {
     const user = await User.findOne({ email })
@@ -148,7 +156,7 @@ bookapi = async (req, res) => {
 
       user.ticket.push({ sname, email, gender, busname, busno, from, to, price, sename })
       user.save()
-      
+
 
       console.log(user);
       res.status(200).json("ticket confirmed")

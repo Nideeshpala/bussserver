@@ -3,7 +3,7 @@ const express=require('express')
 const router =new express.Router()
 
 
-const{ userRegister, userLogin, addbus, getallbus,getbos, bookapi  }=require('../controllers/logic')
+const{ userRegister, userLogin, addbus, getallbus, bookapi, getbos  }=require('../controllers/logic')
 
 
 router.post('/user/register',userRegister)
