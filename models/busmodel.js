@@ -11,13 +11,13 @@ const busSchema = new mongoose.Schema({
   },
   from: {
     type: String,
-    required: true,
-    default:[],
+    required: true
+  
   },
   to: {
     type: String,
-    required: true,
-    default:[],
+    required: true
+   
   },
   Dtime: {
     type: String,
@@ -39,10 +39,8 @@ const busSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  seatsBooked: {
-    type: Array,
-    default: [],
-  },
+  seatsBooked:[Object],
+  seat:[],
   status: {
     type: String,
     default: "Yet to start",
